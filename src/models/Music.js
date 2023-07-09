@@ -1,7 +1,8 @@
 const db = require("../db/database")
-const {DataTypes} = require("sequelize")
+const  {DataTypes} = require("sequelize")
 
-const Video = db.define("Videos",{
+
+const Music = db.define("Musics",{
     name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -9,11 +10,10 @@ const Video = db.define("Videos",{
     description: {
         type: DataTypes.STRING,
     },
-    url:{
+    url: {
         type: DataTypes.STRING,
-        allowNull: false,
     }
 
 })
 
-module.exports = Video
+module.exports = Music;
