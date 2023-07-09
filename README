@@ -1,0 +1,8 @@
+para instalar1: npm i 
+para instalar2: npm install
+para ejecutar1: npm run dev
+para ejecutar1: node src/index.js
+api creado:
+GET: http://localhost:3030/user/getAll
+POST: http://localhost:3030/user/login
+POST: http://localhost:3030/user/insert
