@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const VideoC = require('../controllers/videoController')
+const VideoC = require('../controllers/videoControlles')
 
 router.get('/getAll',VideoC.getAll)
 router.post('/insert',VideoC.insert)
