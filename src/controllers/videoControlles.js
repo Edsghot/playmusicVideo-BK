@@ -89,3 +89,17 @@ exports.update = async (req,res)=>{
         })
     }
 }
+
+exports.descargar = async(req,res)=>{
+    try{
+        const {url} = req.params;
+        if(!url){
+            res.status(404).json({
+                msg: "campo url vacio"
+            })
+        }
+        
+    }catch(error){
+
+    }
+}
