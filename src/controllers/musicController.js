@@ -44,10 +44,10 @@ exports.update = async(req,res)=>{
         const {id} = req.params;
         const {name,description,url} = req.body;
 
-        const video = await Video.findByPk(id);
-        if(!video){
+        const music = await Music.findByPk(id);
+        if(!music){
             res.status(404).json({
-                msg: "no hay Video"
+                msg: "no hay Musica"
             })
         }
 
@@ -57,7 +57,7 @@ exports.update = async(req,res)=>{
             })
         }
 
-        const update = await video.update({name,description,url})
+        const update = await music.update({name,description,url})
 
         res.status(201).json({msg: "operacion exitosa!",result:update});
 
