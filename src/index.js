@@ -4,7 +4,7 @@ const videoRouter = require('./routes/video.routes')
 const musicRouter = require('./routes/video.routes')
 const db = require("./db/database")
 const cors = require("cors");
-
+const fs = require("fs");
 
 
 
@@ -23,7 +23,6 @@ const port = process.env.PORT || 3030;
         throw new Error(error)
     }
 })()
-
 
 
 app.use(express.json());
