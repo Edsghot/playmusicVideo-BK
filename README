@@ -35,6 +35,7 @@ El proyecto expone los siguientes endpoints de MUSIC:
 - GET: `http://localhost:3030/music/getAll`
 - POST: `http://localhost:3030/music/insert`
 - GET: `http://localhost:3030/music/getById:id`
+- PUT: `http://localhost:3030/music/update/4`
 - DELETE: `http://localhost:3030/music/delete:id`
 
 El proyecto expone los siguientes endpoints de VIDEO:
@@ -42,6 +43,7 @@ El proyecto expone los siguientes endpoints de VIDEO:
 - GET: `http://localhost:3030/video/getAll`
 - POST: `http://localhost:3030/video/insert`
 - GET: `http://localhost:3030/video/getById:id`
+- PUT: `http://localhost:3030/video/update/4`
 - DELETE: `http://localhost:3030/video/delete:id`
 
 
