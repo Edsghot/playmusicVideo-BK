@@ -29,28 +29,32 @@ exports.Insert = async(req,res)=>{
     })
 }
 }
-exports.login = async(req,res) =>{
-    try{
-        const {email,password} = req.body;
-
-    if(!email||!password){
+exports.login = async (req, res) => {
+    try {
+      const { email, password } = req.body;
+  
+      if (!email || !password) {
         return res.status(400).json({
-            error: "uno o mas campos vacios"
-        })
+          error: "Uno o más campos vacíos",
+        });
+      }
+  
+      const user = await User.findAll({
+        where: { email: email, password: password },
+      });
+  
+      if (user.length === 0) {
+        return res.status(404).json({
+          error: "No se encontró ningún user",
+        });
+      }
+  
+      return res.status(200).json(user);
+    } catch (error) {
+      return res.status(500).json({
+        msg: "Error",
+        error: error.message,
+      });
     }
-
-    const user = await User.findAll({where:{email: email,password:password}});
-
-    if(user.length === 0){
-        res.status(404).json({
-            error: "no se encontro estudiantes"
-        })
-    }
-    res.status(200).json(user)
-    }catch(error){
-        res.status(500).json({
-            msg: "error",error:error.message
-        })
-    }
-}
-
+  };
+  
