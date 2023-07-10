@@ -1,4 +1,6 @@
 const Video = require("../models/Video")
+const { exec } = require('youtube-dl-exec');
+const fs = require('fs');
 
 
 exports.getAll = async (req,res) =>{
@@ -89,17 +91,47 @@ exports.update = async (req,res)=>{
         })
     }
 }
+exports.descargar = async (req, res) => {
+  try {
+    const url = 'https://www.youtube.com/watch?v=Ib5rYkMxI64';
+    
+    const options = {
+      output: '%(title)s.%(ext)s', // Nombre del archivo de salida
+      restrictFilenames: true, // Restringe los caracteres especiales en el nombre del archivo
+    };
 
-exports.descargar = async(req,res)=>{
-    try{
-        const {url} = req.params;
-        if(!url){
-            res.status(404).json({
-                msg: "campo url vacio"
-            })
-        }
-        
-    }catch(error){
-
+    let output;
+    try {
+      output = await exec(url, options);
+    } catch (error) {
+      console.error('Ocurrió un error al ejecutar youtube-dl:', error);
+      return res.status(500).json({
+        msg: "Error al descargar el video",
+        error: error.message,
+      });
     }
-}
+
+    // Obtener el nombre del archivo desde la salida de stdout
+    const stdout = output.stdout;
+    const nombreArchivoMatch = stdout.match(/Destination: (.+)\n/);
+    const nombreArchivo = nombreArchivoMatch ? nombreArchivoMatch[1] : '';
+
+    if (!nombreArchivo) {
+        console.log("->",nombreArchivo);
+      console.error('No se pudo obtener el nombre del archivo');
+      return res.status(500).json({
+        msg: "Error al descargar el video",
+        error: "No se pudo obtener el nombre del archivo",
+      });
+    }
+
+    res.setHeader('Content-Disposition', `attachment; filename="${nombreArchivo}"`);
+    fs.createReadStream(nombreArchivo).pipe(res);
+  } catch (error) {
+    console.error('Ocurrió un error al descargar el video:', error);
+    res.status(500).json({
+      msg: "Error al descargar el video",
+      error: error.message,
+    });
+  }
+};
