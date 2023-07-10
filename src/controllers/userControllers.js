@@ -10,6 +10,7 @@ exports.getAll = async (req,res) =>{
 }
 
 exports.Insert = async(req,res)=>{
+  try{
     const {name,email,password} = req.body;
 
     if(!name || !email|| !password){
@@ -22,9 +23,15 @@ exports.Insert = async(req,res)=>{
 
 
     res.status(200).json({msg: "operacio exitosa"});
+  }catch(error){
+    res.status(500).json({
+        msg: "error",error:error.message
+    })
+}
 }
 exports.login = async(req,res) =>{
-    const {email,password} = req.body;
+    try{
+        const {email,password} = req.body;
 
     if(!email||!password){
         return res.status(400).json({
@@ -40,4 +47,9 @@ exports.login = async(req,res) =>{
         })
     }
     res.status(200).json(user)
+    }catch(error){
+        res.status(500).json({
+            msg: "error",error:error.message
+        })
+    }
 }

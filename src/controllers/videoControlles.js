@@ -61,3 +61,13 @@ exports.delete = async(req,res)=>{
         })
     }
 }
+
+exports.delete = async (req,res)=>{
+    try{
+
+    }catch(error){
+        res.status(500).json({
+            msg: "error",error:error.message
+        })
+    }
+}
