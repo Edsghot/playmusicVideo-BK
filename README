@@ -41,10 +41,14 @@ El proyecto expone los siguientes endpoints de MUSIC:
 El proyecto expone los siguientes endpoints de VIDEO:
 
 - GET: `http://localhost:3030/video/getAll`
-- POST: `http://localhost:3030/video/insert`
 - GET: `http://localhost:3030/video/getById:id`
+- GET: `http://localhost:3030/video/getById:id`
+- POST: `http://localhost:3030/video/descargar`
+- POST: `http://localhost:3030/video/insert`
 - PUT: `http://localhost:3030/video/update/4`
 - DELETE: `http://localhost:3030/video/delete:id`
+- DELETE: `http://localhost:3030/video/eliminarcache`
+
 
 
 ## Contribuciones
