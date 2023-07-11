@@ -250,6 +250,27 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "music/delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3030/music/delete/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"music",
+								"delete",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -330,6 +351,27 @@
 					"response": []
 				},
 				{
+					"name": "video/downloadById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3030/video/downloadById/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"video",
+								"downloadById",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "/video/getById/4",
 					"request": {
 						"method": "GET",
@@ -362,6 +404,27 @@
 								"video",
 								"update",
 								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "video/delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3030/video/delete/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"video",
+								"delete",
+								"3"
 							]
 						}
 					},

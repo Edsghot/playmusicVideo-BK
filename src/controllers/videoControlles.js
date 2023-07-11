@@ -150,14 +150,30 @@ exports.descargarId = async (req, res) => {
       });
     }
 
-    const video = await Video.findOne({
+    const video = await Video.findByPk(id);
+    if(!video){
+      return res.status(404).json({
+        msg: "no existe el video"
+      })
+    }
+
+    const {url} = await Video.findOne({
       where: { id },
       attributes: ["url"],
     });
 
-    if (video) {
-      console.log("__>"+video)
+    if(!url){
+      return res.status(404).json({
+        msg: "no existe url para este video"
+      })
+    }
+
       await exec(url, options);
+
+      await video.update({
+        download: true
+      })
+
       const filePath = "video.mp4.webm";
 
       if (!fs.existsSync(filePath)) {
@@ -176,12 +192,6 @@ exports.descargarId = async (req, res) => {
         }
       });
       
-    } else {
-      return res.status(404).json({
-        msg: "No se encontro video"
-      })
-      
-    }
   } catch (error) {
     res.status(500).send("Ocurrió un error al descargar el video");
   }
