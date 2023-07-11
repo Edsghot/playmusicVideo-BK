@@ -33,7 +33,7 @@ El proyecto expone los siguientes endpoints de USERS:
 
 El proyecto expone los siguientes endpoints de MUSIC:
 
-- POST: `http://localhost:3030/music//descargar`
+- POST: `http://localhost:3030/music/descargar`
 - POST: `http://localhost:3030/music/insert`
 
 - GET: `http://localhost:3030/music/getById:id`

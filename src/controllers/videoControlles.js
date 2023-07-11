@@ -98,15 +98,55 @@ exports.update = async (req, res) => {
 
 exports.descargar = async (req, res) => {
   try {
-    const { url, id } = req.body;
+    const {url} = req.body;
     const options = {
       output: "video.mp4",
       restrictFilenames: true,
     };
 
-    if (!id || !url) {
+    if (!url) {
       res.status(500).json({
         msg: "uno o mas campos vacios",
+      });
+    }
+
+      await exec(url, options);
+      const filePath = "video.mp4.webm";
+
+      if (!fs.existsSync(filePath)) {
+        throw new Error(
+          "El archivo de video no se encontró en la ubicación esperada"
+        );
+      }
+
+      res.download(filePath, "video.mp4", async (err) => {
+        if (err) {
+           return res
+            .status(500)
+            .send("Ocurrió un error al enviar el archivo al frontend");
+        } else {
+          await unlinkAsync(filePath);
+        }
+      });
+      
+  
+  } catch (error) {
+    res.status(500).send("Ocurrió un error al descargar el video");
+  }
+};
+
+exports.descargarId = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const options = {
+      output: "video.mp4",
+      restrictFilenames: true,
+    };
+
+    if (!id) {
+      res.status(500).json({
+        msg: "digite el ID",
       });
     }
 

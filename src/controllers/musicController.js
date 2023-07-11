@@ -105,8 +105,59 @@ exports.descargarmusica = async (req, res) => {
         audioFormat: 'mp3', // Formato de audio
         restrictFilenames: true, // Restringe los caracteres especiales en el nombre del archivo
       };
-  
+
       await exec(url, options); // Descargar el audio
+      
+      // Enviar el archivo de audio como respuesta al frontend
+      res.download('audio.mp3', 'audio.mp3', async (err) => {
+        if (err) {
+          console.error('Ocurrió un error al enviar el archivo al frontend:', err);
+          res.status(500).send('Ocurrió un error al enviar el archivo al frontend');
+        } else {
+          console.log('¡Audio descargado y enviado exitosamente al frontend!');
+          // Eliminar el archivo de audio después de enviarlo
+          await unlinkAsync('audio.mp3');
+          console.log('¡Archivo de audio eliminado!');
+        }
+      });
+    } catch (error) {
+      console.error('Ocurrió un error al descargar el audio:', error);
+      res.status(500).send('Ocurrió un error al descargar el audio');
+    }
+  };
+
+
+  exports.descargarId = async (req, res) => {
+    try {
+      const {id} = req.params;
+
+      const options = {
+        output: 'audio.mp3', // Nombre del archivo de salida
+        extractAudio: true, // Extrae solo el audio
+        audioFormat: 'mp3', // Formato de audio
+        restrictFilenames: true, // Restringe los caracteres especiales en el nombre del archivo
+      };
+
+      if(!id){
+        return res.status(404).json({
+            msg: "no existe la musica"
+        })
+      }
+
+      const music = await Music.findByPk(id);
+     
+      if(!music){
+        return res.status(404).json({msg: "no existe la musica"})
+      } 
+      const {url} = await Music.findOne({
+        where: { id },
+        attributes: ["url"]
+      });
+
+      console.log("URL-> "+url);
+
+      await exec(url, options); // Descargar el audio
+      await music.update({download:"true"})
   
       // Enviar el archivo de audio como respuesta al frontend
       res.download('audio.mp3', 'audio.mp3', async (err) => {

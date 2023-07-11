@@ -84,10 +84,286 @@
 			"name": "Music",
 			"item": [
 				{
-					"name": "New Request",
+					"name": "music/getAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3030/music/getAll",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"music",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "music/getById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3030/music/getById",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"music",
+								"getById"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "music/downloadById/1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"url\": \"https://youtu.be/vk_xq1P7vIU\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3030/music/downloadById/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"music",
+								"downloadById",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "music/download",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"url\": \"https://youtu.be/vk_xq1P7vIU\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3030/music/download",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"music",
+								"download"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "music/insert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Sam Smith - Fire On Fire \",\n    \"description\": \"favoritos\",\n    \"url\": \"https://youtu.be/vk_xq1P7vIU\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3030/music/insert",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"music",
+								"insert"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "music/update/1",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Sam Smith - Fire On \",\n    \"description\": \"favoritos\",\n    \"url\": \"https://youtu.be/vk_xq1P7vIU\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3030/music/update/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"music",
+								"update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "video",
+			"item": [
+				{
+					"name": "video/Insert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Sam Smith - Fire On Fire \",\n    \"description\": \"favoritos\",\n    \"url\": \"https://youtu.be/vk_xq1P7vIU\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3030/video/insert",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"video",
+								"insert"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "video/download",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"url\": \"https://youtu.be/vk_xq1P7vIU\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3030/video/download",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"video",
+								"download"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "video/getAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3030/video/getAll",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"video",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/video/getById/4",
 					"request": {
 						"method": "GET",
 						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "video/update/4",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Sam Smith 2 \",\n    \"description\": \"favoritos\",\n    \"url\": \"https://youtu.be/vk_xq1P7vIU\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3030/video/update/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"video",
+								"update",
+								"4"
+							]
+						}
 					},
 					"response": []
 				}

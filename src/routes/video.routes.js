@@ -4,7 +4,7 @@ const VideoC = require('../controllers/videoControlles')
 router.get('/getAll',VideoC.getAll)
 router.get('/getById/:id', VideoC.getById);
 //==================POST=======================================
-router.post('/descargar',VideoC.descargar);
+router.post('/download',VideoC.descargar);
 router.post('/insert',VideoC.insert)
 router.put('/update/:id',VideoC.update);
 //================DELETE =================================================
