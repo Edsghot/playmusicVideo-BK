@@ -12,7 +12,11 @@ const Video = db.define("Videos",{
     url:{
         type: DataTypes.STRING,
         allowNull: false,
-    }
+    },
+    download: {
+        type:DataTypes.BOOLEAN,
+        defaultValue: false
+    },
 
 })
 

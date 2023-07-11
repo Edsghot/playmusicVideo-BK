@@ -1,4 +1,9 @@
 const Music = require("../models/Music")
+const { exec } = require("youtube-dl-exec");
+const fs = require("fs");
+const util = require('util');
+const unlinkAsync = util.promisify(fs.unlink);
+
 
 exports.getAll = async (req,res) =>{
     try{
@@ -104,12 +109,15 @@ exports.descargarmusica = async (req, res) => {
       await exec(url, options); // Descargar el audio
   
       // Enviar el archivo de audio como respuesta al frontend
-      res.download(__dirname + '/audio.mp3', 'audio.mp3', (err) => {
+      res.download('audio.mp3', 'audio.mp3', async (err) => {
         if (err) {
           console.error('Ocurrió un error al enviar el archivo al frontend:', err);
           res.status(500).send('Ocurrió un error al enviar el archivo al frontend');
         } else {
           console.log('¡Audio descargado y enviado exitosamente al frontend!');
+          // Eliminar el archivo de audio después de enviarlo
+          await unlinkAsync('audio.mp3');
+          console.log('¡Archivo de audio eliminado!');
         }
       });
     } catch (error) {

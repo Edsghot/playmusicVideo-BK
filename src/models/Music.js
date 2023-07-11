@@ -13,15 +13,10 @@ const Music = db.define("Musics",{
     url: {
         type: DataTypes.STRING,
     },
-    lugar: {
-        type:DataTypes.BOOLEAN,
-        defaultValue: true
-    },
-    donwload: {
-        type:DataTypes.BOOLEAN,
-        defaultValue: true
-    },
-
+    download:{
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+    }
 })
 
 module.exports = Music;

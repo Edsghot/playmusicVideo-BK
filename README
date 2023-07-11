@@ -27,22 +27,25 @@ node src/index
 El proyecto expone los siguientes endpoints de USERS:
 
 - GET: `http://localhost:3030/user/getAll`
+
 - POST: `http://localhost:3030/user/login`
 - POST: `http://localhost:3030/user/insert`
 
 El proyecto expone los siguientes endpoints de MUSIC:
 
-- GET: `http://localhost:3030/music//descargar-audio?url=https://youtu.be/eOyNWshrOJQ`
+- POST: `http://localhost:3030/music//descargar`
 - POST: `http://localhost:3030/music/insert`
+
 - GET: `http://localhost:3030/music/getById:id`
+
 - PUT: `http://localhost:3030/music/update/4`
+
 - DELETE: `http://localhost:3030/music/delete:id`
 
 El proyecto expone los siguientes endpoints de VIDEO:
 
 - GET: `http://localhost:3030/video/getAll`
 - GET: `http://localhost:3030/video/getById:id`
-- GET: `http://localhost:3030/video/descargarvideo`
 
 - POST: `http://localhost:3030/video/descargar`
 - POST: `http://localhost:3030/video/insert`
@@ -50,7 +53,6 @@ El proyecto expone los siguientes endpoints de VIDEO:
 - PUT: `http://localhost:3030/video/update/4`
 
 - DELETE: `http://localhost:3030/video/delete:id`
-- DELETE: `http://localhost:3030/video/eliminarcache`
 
 
 

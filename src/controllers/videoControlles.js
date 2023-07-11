@@ -1,8 +1,8 @@
 const Video = require("../models/Video");
 const { exec } = require("youtube-dl-exec");
 const fs = require("fs");
-const axios = require("axios");
-const ytdl = require("ytdl-core");
+const util = require("util");
+const unlinkAsync = util.promisify(fs.unlink);
 
 exports.getAll = async (req, res) => {
   try {
@@ -96,60 +96,53 @@ exports.update = async (req, res) => {
   }
 };
 
-exports.eliminarcache = async(req,res)=>{
-   try{
-    fs.unlinkSync("1.mp4")
-    res.status(200).json({msg: "ok"})
-   }catch(e){
-    res.status(500).json({msg: "error"})
-   }
-}
-
 exports.descargar = async (req, res) => {
-    try {
+  try {
+    const { url, id } = req.body;
+    const options = {
+      output: "video.mp4",
+      restrictFilenames: true,
+    };
 
-        const { url } = req.body;
-       
-      const options = {
-        output: "1.mp4", // Nombre del archivo de salida
-        restrictFilenames: true, // Restringe los caracteres especiales en el nombre del archivo
-      };
-  
-      const file = await exec(url, options);
-  
-      const stream = fs.createReadStream("1.mp4");
-  
-      res.set({
-        "Content-Type": "video/mp4",
-        "Content-Disposition": "attachment; filename=video.mp4",
-      });
-  
-      stream.pipe(res);
-    } catch (error) {
-      console.error("Ocurrió un error al descargar el video:", error);
+    if (!id || !url) {
       res.status(500).json({
-        msg: "Error al descargar el video",
-        error: error.message,
+        msg: "uno o mas campos vacios",
       });
     }
-  };
 
-
-exports.descargarVideo = async (req, res) => {
-  try {
-    const videoUrl = "https://www.youtube.com/watch?v=Ib5rYkMxI64";
-
-    res.set({
-      "Content-Type": "video/mp4",
-      "Content-Disposition": "attachment; filename=video.mp4",
+    const video = await Video.findOne({
+      where: { id },
+      attributes: ["url"],
     });
 
-    ytdl(videoUrl, { format: "mp4" }).pipe(res);
+    if (video) {
+      console.log("__>"+video)
+      await exec(url, options);
+      const filePath = "video.mp4.webm";
+
+      if (!fs.existsSync(filePath)) {
+        throw new Error(
+          "El archivo de video no se encontró en la ubicación esperada"
+        );
+      }
+
+      res.download(filePath, "video.mp4", async (err) => {
+        if (err) {
+           return res
+            .status(500)
+            .send("Ocurrió un error al enviar el archivo al frontend");
+        } else {
+          await unlinkAsync(filePath);
+        }
+      });
+      
+    } else {
+      return res.status(404).json({
+        msg: "No se encontro video"
+      })
+      
+    }
   } catch (error) {
-    console.error("Ocurrió un error al descargar el video:", error);
-    res.status(500).json({
-      msg: "Error al descargar el video",
-      error: error.message,
-    });
+    res.status(500).send("Ocurrió un error al descargar el video");
   }
 };
