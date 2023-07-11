@@ -24,14 +24,12 @@ const port = process.env.PORT || 3030;
     }
 })()
 
-
 app.use(express.json());
 app.use(cors());
 
-
 app.use("/user/",userRouter);
-app.use("/music/",videoRouter);
-app.use("/video/",musicRouter);
+app.use("/music/",musicRouter);
+app.use("/video/",videoRouter);
 
 app.listen(port,()=>{
     console.log("http://localhost:3030");

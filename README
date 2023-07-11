@@ -32,7 +32,7 @@ El proyecto expone los siguientes endpoints de USERS:
 
 El proyecto expone los siguientes endpoints de MUSIC:
 
-- GET: `http://localhost:3030/music/getAll`
+- GET: `http://localhost:3030/music//descargar-audio?url=https://youtu.be/eOyNWshrOJQ`
 - POST: `http://localhost:3030/music/insert`
 - GET: `http://localhost:3030/music/getById:id`
 - PUT: `http://localhost:3030/music/update/4`
