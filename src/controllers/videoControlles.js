@@ -70,7 +70,7 @@ exports.delete = async (req, res) => {
 exports.update = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, description, url } = req.body;
+    const { name, description, url ,state} = req.body;
 
     const video = await Video.findByPk(id);
     if (!video) {
@@ -79,13 +79,13 @@ exports.update = async (req, res) => {
       });
     }
 
-    if (!name || !description || !url) {
+    if (!name || !description || !url || !state) {
       res.status(400).json({
         msg: "uno o mas campos vacios",
       });
     }
 
-    const update = await video.update({ name, description, url });
+    const update = await video.update({ name, description, url,state });
 
     res.status(201).json({ msg: "operacion exitosa!", result: update });
   } catch (error) {
