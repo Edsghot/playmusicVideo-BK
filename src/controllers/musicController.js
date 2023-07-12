@@ -16,11 +16,11 @@ exports.getAll = async (req,res) =>{
 
 exports.insert = async(req,res)=>{
     try{
-        const {name,description,url} = req.body;
-        if(!name||!description||!url){
+        const {id,name,description,url} = req.body;
+        if(!id||!name||!description||!url){
             res.status(400).json({msg: "uno o mas campos vacios"});
         }
-        const music = await Music.create({name,description,url});
+        const music = await Music.create({id,name,description,url});
 
         res.status(201).json({msg: "operacion exitosa",result:music})
     }catch(error){
