@@ -17,6 +17,10 @@ const Video = db.define("Videos",{
         type:DataTypes.BOOLEAN,
         defaultValue: false
     },
+    state:{
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+    }
 
 })
 
