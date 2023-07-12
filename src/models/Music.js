@@ -14,12 +14,10 @@ const Music = db.define("Musics",{
         type: DataTypes.STRING,
     },
     download:{
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
+        type: DataTypes.BOOLEAN
     },
     state:{
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
+        type: DataTypes.BOOLEAN
     }
 })
 

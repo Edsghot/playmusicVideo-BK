@@ -14,12 +14,10 @@ const Video = db.define("Videos",{
         allowNull: false,
     },
     download: {
-        type:DataTypes.BOOLEAN,
-        defaultValue: false
+        type:DataTypes.BOOLEAN
     },
     state:{
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
+        type: DataTypes.BOOLEAN
     }
 
 })

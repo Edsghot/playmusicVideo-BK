@@ -16,10 +16,14 @@ exports.getAll = async (req, res) => {
 exports.insert = async (req, res) => {
   try {
     const { name, description, url } = req.body;
+
+    const download = false;
+    const state = false;
+
     if (!name || !description || !url) {
       res.status(400).json({ msg: "uno o mas campos vacios" });
     }
-    const video = await Video.create({ name, description, url });
+    const video = await Video.create({ name, description, url,download,state });
 
     res.status(201).json({ msg: "operacion exitosa", result: video });
   } catch (error) {
@@ -74,22 +78,22 @@ exports.update = async (req, res) => {
 
     const video = await Video.findByPk(id);
     if (!video) {
-      res.status(404).json({
+      return res.status(404).json({
         msg: "no hay Video",
       });
     }
 
-    if (!name || !description || !url || !state) {
-      res.status(400).json({
+    if (!name || !description || !url ) {
+      return res.status(400).json({
         msg: "uno o mas campos vacios",
       });
     }
 
     const update = await video.update({ name, description, url,state });
 
-    res.status(201).json({ msg: "operacion exitosa!", result: update });
+   return res.status(201).json({ msg: "operacion exitosa!", result: update });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       msg: "error",
       error: error.message,
     });
