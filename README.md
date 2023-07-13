@@ -13,6 +13,8 @@ Sigue los pasos a continuación para instalar y configurar el proyecto en tu má
 ```shell
 npm i
 npm install
+```
+
 
 ## Uso
 A continuación, se detallan los comandos disponibles para ejecutar el proyecto:
@@ -22,6 +24,7 @@ Para ejecutar el proyecto en modo de desarrollo, utiliza el siguiente comando:
 ```shell
 npm run dev
 node src/index
+```
 
 ## API Creado
 El proyecto expone los siguientes endpoints de USERS:
@@ -55,6 +58,7 @@ El proyecto expone los siguientes endpoints de VIDEO:
 - DELETE: `http://localhost:3030/video/delete:id`
 
 
+## existe mas podrias importar a tu postamn el archivo playMusicVideo.postam que se encuentra en el repositorio
 
 ## Contribuciones
 Si deseas contribuir a este proyecto, sigue los pasos a continuación:
