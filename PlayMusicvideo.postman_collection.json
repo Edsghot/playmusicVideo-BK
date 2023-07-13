@@ -140,7 +140,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"url\": \"https://youtu.be/vk_xq1P7vIU\"\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -271,6 +271,27 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "downloadFile/1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3030/music/downloadFile/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"music",
+								"downloadFile",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -386,7 +407,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Sam Smith 2 \",\n    \"description\": \"favoritos\",\n    \"url\": \"https://youtu.be/vk_xq1P7vIU\"\n}",
+							"raw": "{\n    \"name\": \"Sam Smith 3 \",\n    \"description\": \"favoritos\",\n    \"url\": \"https://youtu.be/vk_xq1P7vIU\",\n    \"state\": false\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -394,7 +415,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3030/video/update/4",
+							"raw": "http://localhost:3030/video/update/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -403,7 +424,7 @@
 							"path": [
 								"video",
 								"update",
-								"4"
+								"1"
 							]
 						}
 					},

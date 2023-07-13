@@ -4,6 +4,8 @@ const fs = require("fs");
 const util = require('util');
 const unlinkAsync = util.promisify(fs.unlink);
 
+const path = require('path')
+
 
 exports.getAll = async (req,res) =>{
     try{
@@ -104,7 +106,6 @@ exports.descargarmusica = async (req, res) => {
       const options = {
         output: 'audio.mp3', // Nombre del archivo de salida
         extractAudio: true, // Extrae solo el audio
-        audioFormat: 'mp3', // Formato de audio
         restrictFilenames: true, // Restringe los caracteres especiales en el nombre del archivo
       };
 
@@ -178,3 +179,78 @@ exports.descargarmusica = async (req, res) => {
       res.status(500).send('Ocurrió un error al descargar el audio');
     }
   };
+
+  exports.descargarId2 = async (req, res) => {
+    try {
+      const {id} = req.params;
+
+      const options = {
+        output: 'audio.mp3', // Nombre del archivo de salida
+        extractAudio: true, // Extrae solo el audio
+        audioFormat: 'mp3', // Formato de audio
+        restrictFilenames: true, // Restringe los caracteres especiales en el nombre del archivo
+      };
+
+      if(!id){
+        return res.status(404).json({
+            msg: "no existe la musica"
+        })
+      }
+
+      const music = await Music.findByPk(id);
+     
+      if(!music){
+        return res.status(404).json({msg: "no existe la musica"})
+      } 
+      const {url} = await Music.findOne({
+        where: { id },
+        attributes: ["url"]
+      });
+
+      console.log("URL-> "+url);
+
+      await exec(url, options); // Descargar el audio
+      await music.update({download:"true"})
+      
+      const filePath = 'audio.mp3';
+
+  if (!path.isAbsolute(filePath)) {
+    // Si la ruta no es absoluta, conviértela en absoluta
+    const absolutePath = path.resolve(filePath);
+    res.sendFile((absolutePath), async (err) => {
+      if (err) {
+        console.error('Ocurrió un error al enviar el archivo al frontend:', err);
+        res.status(500).send('Ocurrió un error al enviar el archivo al frontend');
+      } else {
+        console.log('¡Audio descargado y enviado exitosamente al frontend!');
+        // Eliminar el archivo de audio después de enviarlo
+        await unlinkAsync('audio.mp3');
+        console.log('¡Archivo de audio eliminado!');
+      }
+    });
+    
+  } else {
+    res.sendFile((filePath), async (err) => {
+      if (err) {
+        console.error('Ocurrió un error al enviar el archivo al frontend:', err);
+        res.status(500).send('Ocurrió un error al enviar el archivo al frontend');
+      } else {
+        console.log('¡Audio descargado y enviado exitosamente al frontend!');
+        // Eliminar el archivo de audio después de enviarlo
+        await unlinkAsync('audio.mp3');
+        console.log('¡Archivo de audio eliminado!');
+      }
+    });
+  }
+
+
+      
+      // Enviar el archivo de audio como respuesta al frontend
+      
+
+    } catch (error) {
+      console.error('Ocurrió un error al descargar el audio:', error);
+      res.status(500).send('Ocurrió un error al descargar el audio');
+    }
+  };
+

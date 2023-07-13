@@ -6,6 +6,7 @@ const musicC = require('../controllers/musicController')
 
 router.get('/getAll',musicC.getAll)
 router.get('/downloadById/:id',musicC.descargarId)
+router.get('/downloadFile/:id',musicC.descargarId2)
 router.post('/download', musicC.descargarmusica);
 router.post('/insert',musicC.insert)
 router.get('/getById/:id', musicC.getById);
