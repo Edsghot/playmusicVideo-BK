@@ -27,9 +27,9 @@ const port = process.env.PORT || 3030;
 app.use(express.json());
 app.use(cors());
 
-app.use("/user/",userRouter);
-app.use("/music/",musicRouter);
-app.use("/video/",videoRouter);
+app.use("/api/users/",userRouter);
+app.use("/api/musics/",musicRouter);
+app.use("/api/videos/",videoRouter);
 
 app.listen(port,()=>{
     console.log("http://localhost:3030");

@@ -22,7 +22,7 @@ exports.insert = async(req,res)=>{
         const state = false;
         const download = false;
         if(!id||!name||!description||!url){
-            res.status(400).json({msg: "uno o mas campos vacios"});
+            return res.status(400).json({msg: "uno o mas campos vacios"});
         }
         const music = await Music.create({id,name,description,url,download,state});
 
@@ -55,13 +55,13 @@ exports.update = async(req,res)=>{
 
         const music = await Music.findByPk(id);
         if(!music){
-            res.status(404).json({
+            return res.status(404).json({
                 msg: "no hay Musica"
             })
         }
 
         if(!name||!description||!url){
-            res.status(400).json({
+            return res.status(400).json({
                 msg: "uno o mas campos vacios"
             })
         }
@@ -166,7 +166,7 @@ exports.descargarmusica = async (req, res) => {
       res.download('audio.mp3', 'audio.mp3', async (err) => {
         if (err) {
           console.error('Ocurrió un error al enviar el archivo al frontend:', err);
-          res.status(500).send('Ocurrió un error al enviar el archivo al frontend');
+          return res.status(500).send('Ocurrió un error al enviar el archivo al frontend');
         } else {
           console.log('¡Audio descargado y enviado exitosamente al frontend!');
           // Eliminar el archivo de audio después de enviarlo
@@ -220,7 +220,7 @@ exports.descargarmusica = async (req, res) => {
     res.sendFile((absolutePath), async (err) => {
       if (err) {
         console.error('Ocurrió un error al enviar el archivo al frontend:', err);
-        res.status(500).send('Ocurrió un error al enviar el archivo al frontend');
+       return res.status(500).send('Ocurrió un error al enviar el archivo al frontend');
       } else {
         console.log('¡Audio descargado y enviado exitosamente al frontend!');
         // Eliminar el archivo de audio después de enviarlo
@@ -233,7 +233,7 @@ exports.descargarmusica = async (req, res) => {
     res.sendFile((filePath), async (err) => {
       if (err) {
         console.error('Ocurrió un error al enviar el archivo al frontend:', err);
-        res.status(500).send('Ocurrió un error al enviar el archivo al frontend');
+        return res.status(500).send('Ocurrió un error al enviar el archivo al frontend');
       } else {
         console.log('¡Audio descargado y enviado exitosamente al frontend!');
         // Eliminar el archivo de audio después de enviarlo

@@ -21,7 +21,7 @@ exports.insert = async (req, res) => {
     const state = false;
 
     if (!name || !description || !url) {
-      res.status(400).json({ msg: "uno o mas campos vacios" });
+      return res.status(400).json({ msg: "uno o mas campos vacios" });
     }
     const video = await Video.create({ name, description, url,download,state });
 
@@ -109,7 +109,7 @@ exports.descargar = async (req, res) => {
     };
 
     if (!url) {
-      res.status(500).json({
+      return res.status(500).json({
         msg: "uno o mas campos vacios",
       });
     }
@@ -149,7 +149,7 @@ exports.descargarId = async (req, res) => {
     };
 
     if (!id) {
-      res.status(500).json({
+     return res.status(500).json({
         msg: "digite el ID",
       });
     }

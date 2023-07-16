@@ -4,12 +4,12 @@ const musicC = require('../controllers/musicController')
 
 
 
-router.get('/getAll',musicC.getAll)
-router.get('/downloadById/:id',musicC.descargarId)
-router.get('/downloadFile/:id',musicC.descargarId2)
+router.get('/getall',musicC.getAll)
+router.get('/downloadbyId/:id',musicC.descargarId)
+router.get('/downloadfile/:id',musicC.descargarId2)
 router.post('/download', musicC.descargarmusica);
 router.post('/insert',musicC.insert)
-router.get('/getById/:id', musicC.getById);
+router.get('/getbyid/:id', musicC.getById);
 router.put('/update/:id',musicC.update);
 router.delete('/delete/:id', musicC.delete);
 module.exports = router;
