@@ -5,7 +5,7 @@ require('dotenv').config();
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: 'http://localhost:3000/auth/google/callback',
+    callbackURL: 'http://localhost:3030/api/users/auth/google/callback',
     passReqToCallback: true
   }, (req, accessToken, refreshToken, profile, done) => {
     // Aquí deberías almacenar los datos del usuario en req.user
@@ -13,8 +13,13 @@ passport.use(new GoogleStrategy({
     // y almacenarlo en req.user.email o en la propiedad que desees
     // Ejemplo de almacenamiento de datos en req.user
     req.user = {
+      id: profile.id,
+      displayName: profile.displayName,
       email: profile.emails[0].value,
-      displayName: profile.displayName
+      photo: profile.photos[0].value,
+      provider: profile.provider,
+      accessToken: accessToken,
+      refreshToken: refreshToken
     };
     return done(null, profile);
   }));
