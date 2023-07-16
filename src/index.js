@@ -1,4 +1,7 @@
 const express = require('express');
+const passport = require('passport')
+const session = require('express-session')
+const path = require('path');
 const userRouter = require('./routes/user.routes');
 const videoRouter = require('./routes/video.routes')
 const musicRouter = require('./routes/music.routes')
@@ -24,8 +27,19 @@ const port = process.env.PORT || 3030;
     }
 })()
 
+//midleware
+app.use(session({
+    secret: 'mysecret',
+    resave: false,
+    saveUninitialized: true,
+    cookie:{secure: false}
+}));
+
 app.use(express.json());
 app.use(cors());
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 app.use("/api/users/",userRouter);
 app.use("/api/musics/",musicRouter);
