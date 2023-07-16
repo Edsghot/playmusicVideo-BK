@@ -55,7 +55,7 @@ router.get("/auth/facebook/failure", (req, res) => {
 
 router.get("/auth/protected/fb", isLoggedIn, (req, res) => {
     let name = req.user.displayName;
-    let clientID = req.user.id;
+    let clientID = req.user.clientID;
     let displayName = req.user.displayName;
     let photo = req.user.photo;
   
