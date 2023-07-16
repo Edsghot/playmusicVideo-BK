@@ -19,9 +19,9 @@ exports.Insert = async (req, res) => {
       });
     }
 
-    const users = await User.create({ name, email, password });
+     await User.create({ name, email, password });
 
-    res.status(200).json({ msg: "operacio exitosa" });
+    res.status(200).json({ msg: "operacion exitosa" });
   } catch (error) {
     res.status(500).json({
       msg: "error",
@@ -94,9 +94,20 @@ exports.loginFacebook = async (req, res) => {
     const photo = req.user.photo;
     const token = req.user.token;
 
+    const userFind = await User.findOne({where: {password:clientID}})
+
+    if(!userFind){
+      const user = await User.create({
+        name: name,
+        email: 'facebook',
+        password: clientID
+      })
+      res.status(201).json({ msg: "registrado", data: user,token });
+    }else {
     res
-      .status(200)
-      .json({ msg: "ok", data: { name, clientID, displayName, photo, token } });
+    .status(200)
+    .json({ msg: "ok", data: { name, clientID, displayName, photo, token } });
+    }
   } catch (err) {
     return res.status(500).json({
       msg: "Error",
