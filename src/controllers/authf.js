@@ -15,6 +15,7 @@ passport.use(new FacebookStrategy({
   const clientID = profile.id;
   const displayName = profile.displayName;
   const photo = profile.photos ? profile.photos[0].value : null;
+  const token = accessToken;
 
   // Puedes almacenar los datos en req.user si es necesario
   // Ejemplo de almacenamiento de datos en req.user
@@ -23,7 +24,8 @@ passport.use(new FacebookStrategy({
     name,
     clientID,
     displayName,
-    photo
+    photo,
+    token
   };
 
   return done(null, user);
