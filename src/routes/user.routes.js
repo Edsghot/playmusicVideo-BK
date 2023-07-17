@@ -7,7 +7,7 @@ const isLoggedIn = require('../midleware/mdLogin');
 
 router.get("/getall", userC.getAll);
 router.post("/insert", userC.Insert);
-router.post("/login", userC.login);
+router.get("/login", userC.login);
 router.get("/auth/protected/fb", isLoggedIn,userC.loginFacebook );
 router.get("/auth/protected", isLoggedIn, userC.loginGoogle);
 

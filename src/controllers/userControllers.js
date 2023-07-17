@@ -31,7 +31,7 @@ exports.Insert = async (req, res) => {
 };
 exports.login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password } = req.query;
 
     if (!email || !password) {
       return res.status(400).json({
@@ -49,7 +49,7 @@ exports.login = async (req, res) => {
       });
     }
 
-    return res.status(200).json(user);
+    return res.status(200).json({msg:'ok',data:user[0]});
   } catch (error) {
     return res.status(500).json({
       msg: "Error",
