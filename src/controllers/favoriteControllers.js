@@ -19,13 +19,10 @@ exports.insert = async(req,res)=>{
             return res.status(500).json({msg: 'uno o mas campos vacios'})
         }
         let favorite;
-        if(type === 2){
-           
-            favorite = await Favorite.create({name:name,type:type,idUser:idUser,idVideo:idVideo});
-        }else{   
 
-            favorite = await Favorite.create({name:name,type:type,idUser:idUser,idMusic:idMusic});
-        }
+           
+            favorite = await Favorite.create({name:name,type:type,idUser:idUser,idMusic:idMusic,idVideo:idVideo});
+
 
         res.status(201).json({msg: "operacion exitosa",result:favorite})
     }catch(error){

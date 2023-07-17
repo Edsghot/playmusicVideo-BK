@@ -10,11 +10,21 @@
 			"name": "User",
 			"item": [
 				{
-					"name": "user/getAll",
+					"name": "users/getAll",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVkc2dob3RAZ21haWwuY29tIiwiaWF0IjoxNjg5Mzc4MDg4LCJleHAiOjE2ODkzNzgxNjh9.ZrW0OoAdpmTWo3PHw3Hd7w3fTLWduGIjN8RS3PzX13g",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -27,22 +37,23 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3030/user/getAll",
+							"raw": "http://localhost:3030/api/users/getall",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3030",
 							"path": [
-								"user",
-								"getAll"
+								"api",
+								"users",
+								"getall"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "user/insert",
+					"name": "users/insert",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -56,14 +67,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3030/user/insert",
+							"raw": "http://localhost:3030/api/users/insert",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3030",
 							"path": [
-								"user",
+								"api",
+								"users",
 								"insert"
 							]
 						}
@@ -71,10 +83,62 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "users/login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"password\": \"Repro123.\",\n  \"email\": \"edsghot@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3030/api/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "loginGoogle",
 					"request": {
 						"method": "GET",
 						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "loginFacebook",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3030/api/users/auth/facebook",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"api",
+								"users",
+								"auth",
+								"facebook"
+							]
+						}
 					},
 					"response": []
 				}
@@ -89,15 +153,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3030/music/getAll",
+							"raw": "http://localhost:3030/api/musics/getall",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3030",
 							"path": [
-								"music",
-								"getAll"
+								"api",
+								"musics",
+								"getall"
 							]
 						}
 					},
@@ -116,15 +181,17 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:3030/music/getById",
+							"raw": "http://localhost:3030/api/musics/getbyid/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3030",
 							"path": [
-								"music",
-								"getById"
+								"api",
+								"musics",
+								"getbyid",
+								"1"
 							]
 						}
 					},
@@ -148,15 +215,16 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3030/music/downloadById/1",
+							"raw": "http://localhost:3030/api/musics/downloadbyId/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3030",
 							"path": [
-								"music",
-								"downloadById",
+								"api",
+								"musics",
+								"downloadbyId",
 								"1"
 							]
 						}
@@ -178,14 +246,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3030/music/download",
+							"raw": "http://localhost:3030/api/musics/download",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3030",
 							"path": [
-								"music",
+								"api",
+								"musics",
 								"download"
 							]
 						}
@@ -199,7 +268,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Sam Smith - Fire On Fire \",\n    \"description\": \"favoritos\",\n    \"url\": \"https://youtu.be/vk_xq1P7vIU\"\n}",
+							"raw": "{\n    \"id\": 1,\n    \"name\": \"Sam Smith - Fire On Fire \",\n    \"description\": \"favoritos\",\n    \"url\": \"https://youtu.be/vk_xq1P7vIU\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -207,14 +276,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3030/music/insert",
+							"raw": "http://localhost:3030/api/musics/insert",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3030",
 							"path": [
-								"music",
+								"api",
+								"musics",
 								"insert"
 							]
 						}
@@ -236,14 +306,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3030/music/update/1",
+							"raw": "http://localhost:3030/api/musics/update/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3030",
 							"path": [
-								"music",
+								"api",
+								"musics",
 								"update",
 								"1"
 							]
@@ -257,14 +328,15 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3030/music/delete/1",
+							"raw": "http://localhost:3030/api/musics/delete/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3030",
 							"path": [
-								"music",
+								"api",
+								"musics",
 								"delete",
 								"1"
 							]
@@ -278,15 +350,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3030/music/downloadFile/1",
+							"raw": "http://localhost:3030/api/musics/downloadfile/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3030",
 							"path": [
-								"music",
-								"downloadFile",
+								"api",
+								"musics",
+								"downloadfile",
 								"1"
 							]
 						}
@@ -313,14 +386,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3030/video/insert",
+							"raw": "http://localhost:3030/api/videos/insert",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3030",
 							"path": [
-								"video",
+								"api",
+								"videos",
 								"insert"
 							]
 						}
@@ -334,17 +408,23 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"url\": \"https://youtu.be/vk_xq1P7vIU\"\n}"
+							"raw": "{\n    \"url\": \"https://youtu.be/vk_xq1P7vIU\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
-							"raw": "http://localhost:3030/video/download",
+							"raw": "http://localhost:3030/api/videos/download",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3030",
 							"path": [
-								"video",
+								"api",
+								"videos",
 								"download"
 							]
 						}
@@ -357,14 +437,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3030/video/getAll",
+							"raw": "http://localhost:3030/api/videos/getAll",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3030",
 							"path": [
-								"video",
+								"api",
+								"videos",
 								"getAll"
 							]
 						}
@@ -377,16 +458,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3030/video/downloadById/6",
+							"raw": "http://localhost:3030/api/videos/downloadbyid/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3030",
 							"path": [
-								"video",
-								"downloadById",
-								"6"
+								"api",
+								"videos",
+								"downloadbyid",
+								"1"
 							]
 						}
 					},
@@ -415,14 +497,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3030/video/update/1",
+							"raw": "http://localhost:3030/api/videos/update/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3030",
 							"path": [
-								"video",
+								"api",
+								"videos",
 								"update",
 								"1"
 							]
@@ -436,18 +519,70 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3030/video/delete/3",
+							"raw": "http://localhost:3030/api/videos/delete/3",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3030",
 							"path": [
-								"video",
+								"api",
+								"videos",
 								"delete",
 								"3"
 							]
 						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "favorite",
+			"item": [
+				{
+					"name": "favorites/insert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"favorito ed\",\n    \"type\": 2,\n    \"idUser\": 1,\n    \"idVideo\":1,\n    \"idMusic\": \"si deseas pones uno de los dos\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3030/api/favorites/insert",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"api",
+								"favorites",
+								"insert"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "favorites/getall",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "favorites/getbyid",
+					"request": {
+						"method": "GET",
+						"header": []
 					},
 					"response": []
 				}
