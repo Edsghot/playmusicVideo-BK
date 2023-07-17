@@ -65,7 +65,7 @@ exports.loginGoogle = async (req, res) => {
     const clientID = req.user.id;
     const token = req.user.accessToken;
 
-    const userFind = await User.findOne({ where: { password: clientID } });
+    const userFind = await User.findOne({ where: { email: email } });
 
     if (!userFind) {
       const user = await User.create({
@@ -94,7 +94,7 @@ exports.loginFacebook = async (req, res) => {
     const photo = req.user.photo;
     const token = req.user.token;
 
-    const userFind = await User.findOne({where: {password:clientID}})
+    const userFind = await User.findOne({where: {name:name}})
 
     if(!userFind){
       const user = await User.create({
