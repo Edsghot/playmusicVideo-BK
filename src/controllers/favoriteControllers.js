@@ -12,23 +12,24 @@ exports.getAll = async (req,res) =>{
 
 exports.insert = async(req,res)=>{
     try{
-        const {type,idUser,idMusic,idVideo} = req.body;
+        let {name,type,idUser,idMusic,idVideo} = req.body;
         
 
-        if(!idUser||!type){
+        if(!idUser||!type||!name){
             return res.status(500).json({msg: 'uno o mas campos vacios'})
         }
-        if(type === 'video'){
-            idMusic = 0;
-        }else{
-            idVideo = 0;
-        }
+        let favorite;
+        if(type === 2){
+           
+            favorite = await Favorite.create({name:name,type:type,idUser:idUser,idVideo:idVideo});
+        }else{   
 
-        const favorite = await Favorite.create({type,idUser,idMusic,idVideo});
+            favorite = await Favorite.create({name:name,type:type,idUser:idUser,idMusic:idMusic});
+        }
 
         res.status(201).json({msg: "operacion exitosa",result:favorite})
     }catch(error){
-        res.status(500).json({message: "Error al insertar",error})
+        res.status(500).json({message: "Error al insertar",error: error.message})
     }
 }
 

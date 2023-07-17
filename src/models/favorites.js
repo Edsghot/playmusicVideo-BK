@@ -6,8 +6,11 @@ const Video = require('./Video')
 
 
 const Favorite = db.define('Favorite', {
+    name: {
+      type: DataTypes.STRING
+    },
     type: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     idUser: {
