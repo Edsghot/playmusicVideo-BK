@@ -115,3 +115,24 @@ exports.loginFacebook = async (req, res) => {
     });
   }
 };
+
+exports.getById = async(req,res)=>{
+  try{
+      const {id} = req.params;
+      if(!id){
+          return res.status(500).json({msg:'digite el id'})
+      }
+      const user = await User.findByPk(id);
+
+      if(!user){
+          return res.status(404).json({msg: "user no encontrado"})
+      }
+
+      res.status(200).json({msg:"exitoso",result:user})
+  }catch(error){
+      res.status(500).json({
+          msg: "error",error:error.message
+      })
+  }
+}
+

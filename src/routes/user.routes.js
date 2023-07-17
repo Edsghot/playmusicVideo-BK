@@ -6,6 +6,7 @@ const userC = require("../controllers/userControllers");
 const isLoggedIn = require('../midleware/mdLogin');
 
 router.get("/getall", userC.getAll);
+router.get("/getbyid/:id", userC.getById);
 router.post("/insert", userC.Insert);
 router.get("/login", userC.login);
 router.get("/auth/protected/fb", isLoggedIn,userC.loginFacebook );
