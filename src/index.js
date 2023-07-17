@@ -42,7 +42,7 @@ app.use(passport.session());
 app.use("/api/users/",userRouter);
 app.use("/api/musics/",musicRouter);
 app.use("/api/videos/",videoRouter);
-app.use("api/favorites/",favoriteRouter);
+app.use("/api/favorites/",favoriteRouter);
 
 app.listen(port,()=>{
     console.log("http://localhost:3030/api/");

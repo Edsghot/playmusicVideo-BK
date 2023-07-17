@@ -1,12 +1,12 @@
-const favorite = require('../controllers/favoriteControllers')
-const Router = require('express').Router();
+
+const router = require('express').Router();
+const favoriteC = require('../controllers/favoriteControllers')
 
 
-const router = Router();
 
-
-router.get('/getall',favorite.getAll)
-
-
+router.get('/getall',favoriteC.getAll)
+router.post('/insert',favoriteC.insert)
+router.get('/getbyid/:id', favoriteC.getById);
+router.delete('/delete/:id', favoriteC.delete);
 
 module.exports = router;

@@ -35,6 +35,9 @@ exports.insert = async(req,res)=>{
 exports.getById = async(req,res)=>{
     try{
         const {id} = req.params;
+        if(!id){
+          return res.status(500).json({msg:'digite el id'})
+      }
         const music = await Music.findByPk(id);
 
         if(!music){
