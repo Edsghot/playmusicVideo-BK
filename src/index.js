@@ -1,13 +1,13 @@
 const express = require('express');
 const passport = require('passport')
 const session = require('express-session')
-const path = require('path');
 const userRouter = require('./routes/user.routes');
 const videoRouter = require('./routes/video.routes')
 const musicRouter = require('./routes/music.routes')
+const favoriteRouter = require('./routes/favorite.routes')
 const db = require("./db/database")
 const cors = require("cors");
-const fs = require("fs");
+
 
 const app = express();
 
@@ -42,7 +42,8 @@ app.use(passport.session());
 app.use("/api/users/",userRouter);
 app.use("/api/musics/",musicRouter);
 app.use("/api/videos/",videoRouter);
+app.use("api/favorites/",favoriteRouter);
 
 app.listen(port,()=>{
-    console.log("http://localhost:3030");
+    console.log("http://localhost:3030/api/");
 })

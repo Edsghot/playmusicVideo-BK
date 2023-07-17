@@ -5,15 +5,15 @@ const Music = require('./Music')
 const Video = require('./Video')
 
 
-const Favority = db.define('Favority',{
+const Favorite = db.define('Favorite',{
     type:{
         Type: DataTypes.STRING,
         allowNull: false
     }
 })
 
-Favority.belongsTo(User, { foreignKey: 'idUser' });
-Favority.belongsTo(Music, { foreignKey: 'idMusic' });
-Favority.belongsTo(Video, { foreignKey: 'idVideo' });
+Favorite.belongsTo(User, { foreignKey: 'idUser' });
+Favorite.belongsTo(Music, { foreignKey: 'idMusic' });
+Favorite.belongsTo(Video, { foreignKey: 'idVideo' });
 
-module.exports = Favority
+module.exports = Favorite
