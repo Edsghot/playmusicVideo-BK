@@ -33,7 +33,8 @@ app.use(session({
 
 app.use(express.json());
 app.use(cors({
-    origin: '*'
+    origin: 'http://localhost:4200',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
   }));
 app.use(passport.initialize());
 app.use(passport.session());
