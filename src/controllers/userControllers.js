@@ -57,7 +57,6 @@ exports.login = async (req, res) => {
     });
   }
 };
-
 exports.loginGoogle = async (req, res) => {
   try {
     const email = req.user.email;
@@ -73,10 +72,14 @@ exports.loginGoogle = async (req, res) => {
         email: email,
         password: clientID,
       });
-      res.status(200).json({ msg: "registrado", data: user, token });
+      res.status(200)
+        .header('Cross-Origin-Opener-Policy', 'same-origin')
+        .header('Access-Control-Allow-Origin', 'http://localhost:4200')
+        .json({ msg: "registrado", data: user, token });
     } else {
-      res
-        .status(200)
+      res.status(200)
+        .header('Cross-Origin-Opener-Policy', 'same-origin')
+        .header('Access-Control-Allow-Origin', 'http://localhost:4200')
         .json({ msg: "ok", data: { email, name, clientID, token } });
     }
   } catch (err) {
@@ -86,6 +89,7 @@ exports.loginGoogle = async (req, res) => {
     });
   }
 };
+
 exports.loginFacebook = async (req, res) => {
   try {
     const name = req.user.displayName;
