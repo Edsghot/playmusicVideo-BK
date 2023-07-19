@@ -22,7 +22,7 @@ const port = process.env.PORT || 3000;
     }
 })()
 
-// Configuración del middleware de sesión
+// Configuración del middleware de sesió
 app.use(session({
   secret: 'mysecret',
   resave: false,
