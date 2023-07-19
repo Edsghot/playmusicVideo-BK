@@ -1,5 +1,5 @@
 const User = require("../models/User");
-
+const {Request,Response} = require("express")
 exports.getAll = async (req, res) => {
   try {
     const user = await User.findAll();
@@ -9,26 +9,25 @@ exports.getAll = async (req, res) => {
   }
 };
 
-exports.Insert = async (req, res) => {
+exports.insert = async (Request, Response) => {
   try {
-    const { name, email, password } = req.body;
-
+    const { name, email, password } = Request.body;
+    const state = true;
     if (!name || !email || !password) {
-      return res.status(400).json({
-        error: "uno o mas campos vacios",
-      });
-    }
-
-     await User.create({ name, email, password });
-
-    res.status(200).json({ msg: "operacion exitosa" });
-  } catch (error) {
-    res.status(500).json({
-      msg: "error",
-      error: error.message,
+      return Response.status(400).json({ msg: "Uno o más campos están vacíos" });
+    }    
+    const user = await User.create({
+      name,
+      email,
+      password,
     });
+
+    Response.status(201).json({ msg: "operacion exitosa", result: user });
+  } catch (error) {
+    Response.status(500).json({ message: "Error al insertar", error:error.message });
   }
 };
+
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.query;
@@ -49,7 +48,7 @@ exports.login = async (req, res) => {
       });
     }
 
-    return res.status(200).json({msg:'ok',data:user[0]});
+    return res.status(200).json({ msg: "ok", data: user[0] });
   } catch (error) {
     return res.status(500).json({
       msg: "Error",
@@ -72,20 +71,16 @@ exports.loginGoogle = async (req, res) => {
         email: email,
         password: clientID,
       });
-      res.status(200)
-        .header('Cross-Origin-Opener-Policy', 'same-origin')
-        .header('Access-Control-Allow-Origin', 'http://localhost:4200')
-        .json({ msg: "registrado", data: user, token });
+      res.status(200).json({ msg: "registrado", data: user, token });
     } else {
-      res.status(200)
-        .header('Cross-Origin-Opener-Policy', 'same-origin')
-        .header('Access-Control-Allow-Origin', 'http://localhost:4200')
+      res
+        .status(200)
         .json({ msg: "ok", data: { email, name, clientID, token } });
     }
   } catch (err) {
     return res.status(500).json({
       msg: "Error",
-      error: err,
+      error: err.message,
     });
   }
 };
@@ -98,19 +93,22 @@ exports.loginFacebook = async (req, res) => {
     const photo = req.user.photo;
     const token = req.user.token;
 
-    const userFind = await User.findOne({where: {name:name}})
+    const userFind = await User.findOne({ where: { name: name } });
 
-    if(!userFind){
+    if (!userFind) {
       const user = await User.create({
         name: name,
-        email: 'facebook',
-        password: clientID
-      })
-      res.status(201).json({ msg: "registrado", data: user,token });
-    }else {
-    res
-    .status(200)
-    .json({ msg: "ok", data: { name, clientID, displayName, photo, token } });
+        email: "facebook",
+        password: clientID,
+      });
+      res.status(201).json({ msg: "registrado", data: user, token });
+    } else {
+      res
+        .status(200)
+        .json({
+          msg: "ok",
+          data: { name, clientID, displayName, photo, token },
+        });
     }
   } catch (err) {
     return res.status(500).json({
@@ -120,23 +118,23 @@ exports.loginFacebook = async (req, res) => {
   }
 };
 
-exports.getById = async(req,res)=>{
-  try{
-      const {id} = req.params;
-      if(!id){
-          return res.status(500).json({msg:'digite el id'})
-      }
-      const user = await User.findByPk(id);
+exports.getById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!id) {
+      return res.status(500).json({ msg: "digite el id" });
+    }
+    const user = await User.findByPk(id);
 
-      if(!user){
-          return res.status(404).json({msg: "user no encontrado"})
-      }
+    if (!user) {
+      return res.status(404).json({ msg: "user no encontrado" });
+    }
 
-      res.status(200).json({msg:"exitoso",result:user})
-  }catch(error){
-      res.status(500).json({
-          msg: "error",error:error.message
-      })
+    res.status(200).json({ msg: "exitoso", result: user });
+  } catch (error) {
+    res.status(500).json({
+      msg: "error",
+      error: error.message,
+    });
   }
-}
-
+};

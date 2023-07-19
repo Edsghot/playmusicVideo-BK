@@ -21,8 +21,8 @@ exports.insert = async (req, res) => {
     const state = false;
     const download = false;
     if (!id || !name || !description || !url) {
-      return res.status(400).json({ msg: "uno o mas campos vacios" });
-    }
+      return res.status(400).json({ msg: "Uno o más campos están vacíos" });
+    }    
     const music = await Music.create({
       id,
       name,
@@ -34,7 +34,7 @@ exports.insert = async (req, res) => {
 
     res.status(201).json({ msg: "operacion exitosa", result: music });
   } catch (error) {
-    res.status(500).json({ message: "Error al insertar", error });
+    res.status(500).json({ message: "Error al insertar", error:error.message });
   }
 };
 
