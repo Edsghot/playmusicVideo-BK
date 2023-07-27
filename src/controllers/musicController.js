@@ -111,10 +111,10 @@ exports.delete = async (req, res) => {
 
 exports.descargarmusica = async (req, res) => {
   try {
-    const { url } = req.query;
+    const { url ,name} = req.query;
 
     const options = {
-      output: "audio.mp3", // Nombre del archivo de salida
+      output: name+".mp3", // Nombre del archivo de salida
       extractAudio: true, // Extrae solo el audio
       audioFormat: "mp3", // Formato de audio
       restrictFilenames: true, // Restringe los caracteres especiales en el nombre del archivo
@@ -128,7 +128,7 @@ exports.descargarmusica = async (req, res) => {
 
     await exec(url, options); // Descargar el audio
 
-    const filePath = "audio.mp3";
+    const filePath = name+".mp3";
 
     if (!path.isAbsolute(filePath)) {
       // Si la ruta no es absoluta, conviértela en absoluta
@@ -162,7 +162,7 @@ exports.descargarmusica = async (req, res) => {
         } else {
           console.log("¡Audio descargado y enviado exitosamente al frontend!");
           // Eliminar el archivo de audio después de enviarlo
-          await unlinkAsync("audio.mp3");
+          await unlinkAsync(name+".mp3");
           console.log("¡Archivo de audio eliminado!");
         }
       });
@@ -177,13 +177,6 @@ exports.descargarId = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const options = {
-      output: "audio.mp3", // Nombre del archivo de salida
-      extractAudio: true, // Extrae solo el audio
-      audioFormat: "mp3", // Formato de audio
-      restrictFilenames: true, // Restringe los caracteres especiales en el nombre del archivo
-    };
-
     if (!id) {
       return res.status(404).json({
         msg: "no existe la musica",
@@ -195,18 +188,26 @@ exports.descargarId = async (req, res) => {
     if (!music) {
       return res.status(404).json({ msg: "no existe la musica" });
     }
-    const { url } = await Music.findOne({
+    const { url ,name} = await Music.findOne({
       where: { id },
-      attributes: ["url"],
+      attributes: ["url","name"],
     });
 
     console.log("URL-> " + url);
+
+
+    const options = {
+      output: name+".mp3", // Nombre del archivo de salida
+      extractAudio: true, // Extrae solo el audio
+      audioFormat: "mp3", // Formato de audio
+      restrictFilenames: true, // Restringe los caracteres especiales en el nombre del archivo
+    };
 
     await exec(url, options); // Descargar el audio
     await music.update({ download: "true" });
 
     // Enviar el archivo de audio como respuesta al frontend
-    res.download("audio.mp3", "audio.mp3", async (err) => {
+    res.download(name+".mp3", name+".mp3", async (err) => {
       if (err) {
         console.error(
           "Ocurrió un error al enviar el archivo al frontend:",
@@ -218,7 +219,7 @@ exports.descargarId = async (req, res) => {
       } else {
         console.log("¡Audio descargado y enviado exitosamente al frontend!");
         // Eliminar el archivo de audio después de enviarlo
-        await unlinkAsync("audio.mp3");
+        await unlinkAsync(name+".mp3");
         console.log("¡Archivo de audio eliminado!");
       }
     });
@@ -232,12 +233,6 @@ exports.descargarId2 = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const options = {
-      output: "audio.mp3", // Nombre del archivo de salida
-      extractAudio: true, // Extrae solo el audio
-      audioFormat: "mp3", // Formato de audio
-      restrictFilenames: true, // Restringe los caracteres especiales en el nombre del archivo
-    };
 
     if (!id) {
       return res.status(404).json({
@@ -250,17 +245,25 @@ exports.descargarId2 = async (req, res) => {
     if (!music) {
       return res.status(404).json({ msg: "no existe la musica" });
     }
-    const { url } = await Music.findOne({
+    const { url ,name} = await Music.findOne({
       where: { id },
-      attributes: ["url"],
+      attributes: ["url","name"],
     });
+
+
+    const options = {
+      output: name+".mp3", // Nombre del archivo de salida
+      extractAudio: true, // Extrae solo el audio
+      audioFormat: "mp3", // Formato de audio
+      restrictFilenames: true, // Restringe los caracteres especiales en el nombre del archivo
+    };
 
     console.log("URL-> " + url);
 
     await exec(url, options); // Descargar el audio
     await music.update({ download: "true" });
 
-    const filePath = "audio.mp3";
+    const filePath = name+".mp3";
 
     if (!path.isAbsolute(filePath)) {
       // Si la ruta no es absoluta, conviértela en absoluta
@@ -277,7 +280,7 @@ exports.descargarId2 = async (req, res) => {
         } else {
           console.log("¡Audio descargado y enviado exitosamente al frontend!");
           // Eliminar el archivo de audio después de enviarlo
-          await unlinkAsync("audio.mp3");
+          await unlinkAsync(name+".mp3");
           console.log("¡Archivo de audio eliminado!");
         }
       });
@@ -294,7 +297,7 @@ exports.descargarId2 = async (req, res) => {
         } else {
           console.log("¡Audio descargado y enviado exitosamente al frontend!");
           // Eliminar el archivo de audio después de enviarlo
-          await unlinkAsync("audio.mp3");
+          await unlinkAsync(name+".mp3");
           console.log("¡Archivo de audio eliminado!");
         }
       });
@@ -302,7 +305,6 @@ exports.descargarId2 = async (req, res) => {
 
     // Enviar el archivo de audio como respuesta al frontend
   } catch (error) {
-    console.error("Ocurrió un error al descargar el audio:", error);
     res.status(500).send("Ocurrió un error al descargar el audio");
   }
 };

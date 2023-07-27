@@ -100,22 +100,25 @@ exports.update = async (req, res) => {
   }
 };
 
+
 exports.descargar = async (req, res) => {
   try {
-    const {url} = req.body;
+    const { url ,name} = req.body;
+
     const options = {
-      output: "video.mp4",
+      output: name+".mp4",
       restrictFilenames: true,
     };
 
-    if (!url) {
-      return res.status(500).json({
-        msg: "uno o mas campos vacios",
-      });
+    if(!url){
+      return res.status(404).json({
+        msg: "no existe url para este video"
+      })
     }
 
       await exec(url, options);
-      const filePath = "video.mp4.webm";
+
+      const filePath = name+".mp4.webm";
 
       if (!fs.existsSync(filePath)) {
         throw new Error(
@@ -133,20 +136,16 @@ exports.descargar = async (req, res) => {
         }
       });
       
-  
   } catch (error) {
     res.status(500).send("Ocurrió un error al descargar el video");
   }
 };
 
+
 exports.descargarId = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const options = {
-      output: "video.mp4",
-      restrictFilenames: true,
-    };
 
     if (!id) {
      return res.status(500).json({
@@ -161,10 +160,15 @@ exports.descargarId = async (req, res) => {
       })
     }
 
-    const {url} = await Video.findOne({
+    const {url,name} = await Video.findOne({
       where: { id },
-      attributes: ["url"],
+      attributes: ["url","name"],
     });
+
+    const options = {
+      output: name+".mp4",
+      restrictFilenames: true,
+    };
 
     if(!url){
       return res.status(404).json({
@@ -178,7 +182,7 @@ exports.descargarId = async (req, res) => {
         download: true
       })
 
-      const filePath = "video.mp4.webm";
+      const filePath = name+".mp4.webm";
 
       if (!fs.existsSync(filePath)) {
         throw new Error(
@@ -197,6 +201,6 @@ exports.descargarId = async (req, res) => {
       });
       
   } catch (error) {
-    res.status(500).send("Ocurrió un error al descargar el video");
+    res.status(500).send(error.message);
   }
 };

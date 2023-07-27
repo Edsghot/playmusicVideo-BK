@@ -20,7 +20,6 @@ exports.insert = async(req,res)=>{
         }
         let favorite;
 
-           
             favorite = await Favorite.create({name:name,type:type,idUser:idUser,idMusic:idMusic,idVideo:idVideo});
 
 
@@ -73,4 +72,8 @@ exports.delete = async(req,res)=>{
             msg: "error",error:error.message
         })
     }
+}
+
+exports.getByVideo = async(req,res)=>{
+    
 }
