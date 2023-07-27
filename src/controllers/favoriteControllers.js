@@ -1,5 +1,5 @@
 const Favorite = require("../models/favorites")
-
+const Video = require("../models/Video");
 
 exports.getAll = async (req,res) =>{
     try{
@@ -14,13 +14,14 @@ exports.insert = async(req,res)=>{
     try{
         let {name,type,idUser,idMusic,idVideo} = req.body;
         
+        idMusic = null;
 
         if(!idUser||!type||!name){
             return res.status(500).json({msg: 'uno o mas campos vacios'})
         }
         let favorite;
 
-            favorite = await Favorite.create({name:name,type:type,idUser:idUser,idMusic:idMusic,idVideo:idVideo});
+        favorite = await Favorite.create({name:name,type:type,idUser:idUser,idMusic:idMusic,idVideo:idVideo});
 
 
         res.status(201).json({msg: "operacion exitosa",result:favorite})
@@ -75,5 +76,45 @@ exports.delete = async(req,res)=>{
 }
 
 exports.getByVideo = async(req,res)=>{
+    try{
+        const {idUser,name} = req.query;
+
+        if(!idUser || !name){
+        return res.status(400).json({
+                msg: "uno o mas campos vacios"
+            })
+        }
+
+        const favorites = await Favorite.findAll({
+            where: {
+                name: name,
+                idUser: idUser,
+            },
+            attributes: ['idVideo'],
+        });
+
+        if(!favorites){
+            return res.status(404).json({
+                            msg: "No se encontro el favorite"
+                        })
+        }
+        const idVideoss = favorites.map((favorite) => 
+        favorite.idVideo
+        );
+
+        let Videos = [];
+
+        for(let i = 0;i<idVideoss.length;i++) {
+            Videos.push(await Video.findAll({
+                where: {
+                    id: idVideoss[i],
+                }}))
+        }
+
+        res.status(200).json({msg:"ok",data: Videos})
+
+    }catch(err){
+        res.status(500).json({error:err.message})
+    }
     
 }
