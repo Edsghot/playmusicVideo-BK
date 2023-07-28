@@ -59,7 +59,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Edsghot\",\n    \"email\": \"edsghot@gmail.com\",\n    \"password\": \"Repro123.\"\n}",
+							"raw": "{\n    \"name\": \"Erick\",\n    \"email\": \"edshot2@gmail.com\",\n    \"password\": \"pro123.\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -67,12 +67,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3030/api/users/insert",
+							"raw": "http://soundthezerb.ccontrolz.com/api/users/insert",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"soundthezerb",
+								"ccontrolz",
+								"com"
 							],
-							"port": "3030",
 							"path": [
 								"api",
 								"users",
@@ -128,8 +129,21 @@
 				{
 					"name": "loginGoogle",
 					"request": {
-						"method": "GET",
-						"header": []
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3030/api/users/google",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"api",
+								"users",
+								"google"
+							]
+						}
 					},
 					"response": []
 				},
@@ -152,6 +166,14 @@
 								"facebook"
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "users/getbyid",
+					"request": {
+						"method": "GET",
+						"header": []
 					},
 					"response": []
 				}
@@ -246,8 +268,11 @@
 				},
 				{
 					"name": "music/download",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -259,7 +284,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3030/api/musics/download",
+							"raw": "http://localhost:3030/api/musics/download?url=https://youtu.be/vk_xq1P7vIU",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -269,6 +294,12 @@
 								"api",
 								"musics",
 								"download"
+							],
+							"query": [
+								{
+									"key": "url",
+									"value": "https://youtu.be/vk_xq1P7vIU"
+								}
 							]
 						}
 					},
@@ -421,7 +452,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"url\": \"https://youtu.be/vk_xq1P7vIU\"\n}",
+							"raw": "{\n    \"url\": \"https://youtu.be/vk_xq1P7vIU\",\n    \"name\": \"erick\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -429,12 +460,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3030/api/videos/download",
-							"protocol": "http",
+							"raw": "https://soundthezerb.ccontrolz.com/api/videos/download",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"soundthezerb",
+								"ccontrolz",
+								"com"
 							],
-							"port": "3030",
 							"path": [
 								"api",
 								"videos",
@@ -560,7 +592,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"favorito ed\",\n    \"type\": 2,\n    \"idUser\": 1,\n    \"idVideo\":1,\n    \"idMusic\": \"si deseas pones uno de los dos\"\n}",
+							"raw": "{\n    \"name\": \"balada\",\n    \"type\": 1,\n    \"idUser\": 1,\n    \"idVideo\":8\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -593,6 +625,14 @@
 				},
 				{
 					"name": "favorites/getbyid",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "favorites/getbyfavorite/video",
 					"request": {
 						"method": "GET",
 						"header": []
