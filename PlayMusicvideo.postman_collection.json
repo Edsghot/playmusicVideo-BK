@@ -757,6 +757,38 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "favorites/deleteplayist",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3030/api/favorites/deleteplayist?name=bachata",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"api",
+								"favorites",
+								"deleteplayist"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "bachata"
+								},
+								{
+									"key": "idVideo",
+									"value": "8",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
