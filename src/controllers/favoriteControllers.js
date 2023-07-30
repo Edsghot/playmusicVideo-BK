@@ -216,3 +216,31 @@ exports.deleteByVideo = async (req, res) => {
       res.status(500).json({ error: err.message });
     }
   };
+
+  exports.verify = async (req, res) => {
+    try {
+      const {idVideo } = req.query;
+  
+      if (!idVideo) {
+        return res.status(400).json({
+          msg: "uno o mas campos vacios",
+        });
+      }
+  
+      const favorites = await Favorite.findOne({
+        where: {
+          idVideo: idVideo
+        }
+      });
+    
+      if(!favorites){
+        return res.status(200).json({
+            msg: false,
+          });
+      }
+  
+      res.status(200).json({ msg:true});
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  };
