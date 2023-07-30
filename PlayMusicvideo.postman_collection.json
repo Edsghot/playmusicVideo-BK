@@ -789,6 +789,38 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "favorites/getverify",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3030/api/favorites/getverify?idVideo=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"api",
+								"favorites",
+								"getverify"
+							],
+							"query": [
+								{
+									"key": "idVideo",
+									"value": "1"
+								},
+								{
+									"key": "name",
+									"value": "balada",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
