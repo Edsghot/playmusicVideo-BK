@@ -189,3 +189,30 @@ exports.deleteByVideo = async (req, res) => {
       res.status(500).json({ error: err.message });
     }
   };
+  exports.deletePlayist = async (req, res) => {
+    try {
+      const {name } = req.query;
+  
+      if (!name) {
+        return res.status(400).json({
+          msg: "uno o mas campos vacios",
+        });
+      }
+  
+      const favorites = await Favorite.destroy({
+        where: {
+          name: name
+        }
+      });
+    
+      if(!favorites){
+        return res.status(404).json({
+            msg: "no existe el video",
+          });
+      }
+  
+      res.status(200).json({ msg: "operación exitosa",data:favorites});
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  };
