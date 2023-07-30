@@ -128,3 +128,33 @@ exports.getByVideo = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+exports.deleteByVideo = async (req, res) => {
+    try {
+      const { idUser, idVideo ,name} = req.query;
+  
+      if (!idUser || !idVideo || !name) {
+        return res.status(400).json({
+          msg: "uno o mas campos vacios",
+        });
+      }
+  
+      const favorites = await Favorite.findOne({
+        where: {
+          idVideo: idVideo,
+          idUser: idUser,
+          name:name
+        }
+      });
+    
+      if(!favorites){
+        return res.status(404).json({
+            msg: "no existe el video",
+          });
+      }
+      await favorites.destroy();
+  
+      res.status(200).json({ msg: "operación exitosa"});
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  };
