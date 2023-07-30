@@ -635,7 +635,31 @@
 					"name": "favorites/getbyfavorite/video",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3030/api/favorites/getbyfavorite/video?idUser=1&name=balada",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"api",
+								"favorites",
+								"getbyfavorite",
+								"video"
+							],
+							"query": [
+								{
+									"key": "idUser",
+									"value": "1"
+								},
+								{
+									"key": "name",
+									"value": "balada"
+								}
+							]
+						}
 					},
 					"response": []
 				},
@@ -656,6 +680,79 @@
 								"favorites",
 								"delete",
 								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletebyfavorite/video",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3030/api/favorites/deletebyfavorite/video?idUser=1&idVideo=8&name=balada",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"api",
+								"favorites",
+								"deletebyfavorite",
+								"video"
+							],
+							"query": [
+								{
+									"key": "idUser",
+									"value": "1"
+								},
+								{
+									"key": "idVideo",
+									"value": "8"
+								},
+								{
+									"key": "name",
+									"value": "balada"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletebyfavorite/total",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3030/api/favorites/deletebyfavorite/total?idUser=1&idVideo=8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"api",
+								"favorites",
+								"deletebyfavorite",
+								"total"
+							],
+							"query": [
+								{
+									"key": "idUser",
+									"value": "1"
+								},
+								{
+									"key": "idVideo",
+									"value": "8"
+								},
+								{
+									"key": "name",
+									"value": "balada",
+									"disabled": true
+								}
 							]
 						}
 					},
